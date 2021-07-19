@@ -30,7 +30,12 @@ class App extends Component {
     return(
       <div>
         <h1>HEY GURL I WORK I WORK</h1>
-        <ListItem projectData={projectData}/>
+        {
+          projectData.map(data => (
+            <ListItem data={data}/>
+          ))
+        }
+        
       </div>
     )
   }
