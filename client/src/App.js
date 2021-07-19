@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListItem from '../componets/List Item/ListItem';
 import axios from 'axios';
 
 
@@ -8,25 +9,28 @@ class App extends Component {
      super(props);
      this.state =  {
         projectData: [],
+        test: "I am test data"
      };
    }
 
 
    componentDidMount(){
-     fetch('http://localhost:8000/entertainment').then((res) => {
+     fetch('http://localhost:8000/entertainment')
+     .then((res) => res.json())
+     .then(data => { 
+       console.log(data.businesses[0])
        this.setState({
-         projectData: res.json()
+         projectData: data.businesses[0]
        })
-     }).then(res => {
-      console.log(this.state.projectData)
      })
    }
 
   render(){
-    const { projectData } = this.state;
+    const { projectData,test } = this.state;   
     return(
       <div>
         <h1>HEY GURL I WORK I WORK</h1>
+        <ListItem projectData={projectData}/>
       </div>
     )
   }

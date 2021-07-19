@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const cors = require('cors')
+const cors = require('cors');
+const { response } = require('express');
 require('dotenv').config();
 app.use(cors());
 console.log(process.env)
@@ -12,13 +13,15 @@ app.get('/',(req,res) => {
 })
 
 app.get('/entertainment', async (req,res) => {
- axios.get(process.env.API_URL, {
-    headers: {
-      'Authorization': `Bearer ${process.env.API_KEY}`
-    }
-  }).then((response) => {
-    res.send(response.data)
-  }).catch(e => console.log(e, "SOME ERROR"))
+  await axios.get(process.env.API_URL, {
+        headers: {
+          'Authorization': `Bearer ${process.env.API_KEY}`,
+          "Content-type": "application/json"
+        }
+      })
+      .then(resp => resp.data)
+      .then(json => res.send(json))
+      .catch(err => console.log(err))
 })
 
 app.listen(8000, ()=> {
