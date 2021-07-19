@@ -1,9 +1,10 @@
 import React from 'react';
+import './ListItem.scss'
 
 const ListItem = (props) => {
     const { projectData } = props;
   return (
-    <div>{projectData.name}</div>
+    <div className="well">{projectData.name}</div>
   )
 }
 export default ListItem;
