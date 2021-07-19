@@ -20,7 +20,7 @@ class App extends Component {
      .then(data => { 
        console.log(data.businesses[0])
        this.setState({
-         projectData: data.businesses[0]
+         projectData: data.businesses
        })
      })
    }
