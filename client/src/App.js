@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ListItem from '../componets/List Item/ListItem';
-import axios from 'axios';
+import './App.scss'
 
 
 
@@ -30,11 +30,14 @@ class App extends Component {
     return(
       <div>
         <h1>HEY GURL I WORK I WORK</h1>
+        <div className="container">
         {
           projectData.map(data => (
             <ListItem data={data}/>
           ))
         }
+        </div>
+        
         
       </div>
     )

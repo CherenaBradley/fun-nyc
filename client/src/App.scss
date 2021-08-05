@@ -1,11 +1,8 @@
 $bg-color: red;
 $text-color: white;
 
-*{
-  background-color: $bg-color;
-  color: $text-color;
-
-  h1{
-    color: rebeccapurple;
-  }
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
