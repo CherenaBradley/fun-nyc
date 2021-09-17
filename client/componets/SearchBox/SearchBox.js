@@ -1,10 +1,11 @@
 import React from 'react';
+import './SearchBox.scss'
 
 
 const SearchBox = ({handleSearch}) => (
   <input
     placeholder="Find your fun"
-    className="SearchField"
+    className="searchField"
     onChange={handleSearch}
   />
 )

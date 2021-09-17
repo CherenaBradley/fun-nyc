@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ListItem from '../componets/List Item/ListItem';
 import SearchBox from '../componets/SearchBox/SearchBox';
-import LocalDropDown from '../componets/LocationFilter.js/LocalDropDrown';
-import filteredBorough from './utils/filterBorough';
 import searchTerm from './utils/searchTerm';
 import './App.scss'
 
@@ -14,10 +12,8 @@ class App extends Component {
      this.state =  {
         projectData: [],
         query: '',
-        borough: ''
      };
      this.handleSearch = this.handleSearch.bind(this);
-     this.handleLocalSelection = this.handleLocalSelection.bind(this);
    }
 
    componentDidMount(){
@@ -38,32 +34,38 @@ class App extends Component {
     console.log(event.target.value)
    }
 
-   handleLocalSelection(event){
-     this.setState({
-       borough: event.target.value,
-     })
-     console.log(event.target.value)
-   }
+  
 
   render(){
-    const { projectData,borough, query } = this.state; 
-    const newData = searchTerm(projectData,query); 
+    const { projectData, query } = this.state; 
+    const newData = searchTerm(projectData,query);
+    const dataLength = newData.dataLength;
+    console.log(dataLength)
+    let showData;
+    if((dataLength == 0) ){
+      showData =<div> <h5>No search resutls with that term</h5></div>
+
+    } else {
+      
+      showData = <div className="container">
+      {
+        newData.map(data => (
+          <ListItem data={data}/>
+        ))
+      }
+      </div>
+    }
     
     return(
       <div>
         <h1>Yay I work</h1>
         <div className="filters">
           <SearchBox handleSearch={this.handleSearch} />
-          <LocalDropDown handleLocalSelection={this.handleLocalSelection}/>
+          
         </div>
+        {showData}
         
-        <div className="container">
-        {
-          newData.map(data => (
-            <ListItem data={data}/>
-          ))
-        }
-        </div>
+        
       </div>
     )
   }

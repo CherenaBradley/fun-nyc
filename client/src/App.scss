@@ -8,7 +8,7 @@ $text-color: white;
 }
 
 .filters {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  place-items: center;
+  margin: 1rem;
 }
