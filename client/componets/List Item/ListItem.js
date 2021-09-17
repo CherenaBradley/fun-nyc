@@ -16,9 +16,6 @@ const ListItem = (props) => {
         <img className="ListCard__front" src={data.image_url} />
         </div>
          
-
-        
-
         <div className="ListCard__back">
           <div className="ListCard__back__details">
           <div className="ListCard__back__details--title">

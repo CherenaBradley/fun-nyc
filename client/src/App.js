@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import ListItem from '../componets/List Item/ListItem';
+import SearchBox from '../componets/SearchBox/SearchBox';
+import LocalDropDown from '../componets/LocationFilter.js/LocalDropDrown';
+import filteredBorough from './utils/filterBorough';
+import searchTerm from './utils/searchTerm';
 import './App.scss'
 
 
@@ -9,10 +13,12 @@ class App extends Component {
      super(props);
      this.state =  {
         projectData: [],
-        test: "I am test data"
+        query: '',
+        borough: ''
      };
+     this.handleSearch = this.handleSearch.bind(this);
+     this.handleLocalSelection = this.handleLocalSelection.bind(this);
    }
-
 
    componentDidMount(){
      fetch('http://localhost:8000/entertainment')
@@ -24,21 +30,40 @@ class App extends Component {
        })
      })
    }
+   
+   handleSearch(event){
+     this.setState({
+       query: event.target.value,
+     })
+    console.log(event.target.value)
+   }
+
+   handleLocalSelection(event){
+     this.setState({
+       borough: event.target.value,
+     })
+     console.log(event.target.value)
+   }
 
   render(){
-    const { projectData,test } = this.state;   
+    const { projectData,borough, query } = this.state; 
+    const newData = searchTerm(projectData,query); 
+    
     return(
       <div>
-        <h1>HEY GURL I WORK I WORK</h1>
+        <h1>Yay I work</h1>
+        <div className="filters">
+          <SearchBox handleSearch={this.handleSearch} />
+          <LocalDropDown handleLocalSelection={this.handleLocalSelection}/>
+        </div>
+        
         <div className="container">
         {
-          projectData.map(data => (
+          newData.map(data => (
             <ListItem data={data}/>
           ))
         }
         </div>
-        
-        
       </div>
     )
   }
